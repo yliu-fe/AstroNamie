@@ -1,5 +1,23 @@
 ---
+import '../styles/global.css';
 
+
+const pageTitle="关于我";
+
+const identity = {
+  firstName: "莎拉",
+  country: "加拿大",
+  occupation: "技术撰稿人",
+  hobbies: ["摄影", "观鸟", "棒球"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "navy";
 ---
 
 <html lang="zh-cn">
@@ -8,7 +26,17 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{pageTitle}</title>
+		<style define:vars={{skillColor}}> 
+			h1 {
+			  color: purple;
+			  font-size: 4rem;
+			}
+			.skill{
+				color: var(--skillColor);
+				font-weight: bold;
+			}
+		  </style>
 	</head>
 	<body>
 		<h1>Astro</h1>
@@ -17,5 +45,23 @@
         <p>使用Github Pages做自动发布的流程参见Astro官方文档“Deploy your Astro Site to GitHub Pages”部分。
     
             目前需要配置astro.config.mjs，正在测试。正在测试。 </p>
+
+		<p>我的几个事实：</p>
+		<ul>
+			<li>我的名字是{identity.firstName}.</li>
+			<li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
+			{identity.hobbies.length >= 2 &&
+			  <li>我的两个习惯：{identity.hobbies[0]}和{identity.hobbies[1]}</li>
+			}
+		  </ul>
+		  <p>我的技能是：</p>
+		  <ul>
+			{skills.map((skill) => <li class="skill">{skill}</li>)}
+		  </ul>
+
+		  {happy && <p>我非常乐意学习 Astro！</p>}
+		  <!-- if statement(&&) and if-else statement(?) -->
+		  {finished && <p>我完成了这节教程！</p>}
+		  {goal === 3 ? <p>我的目标是在三天内完成。</p> : <p>我的目标不是 3 天。</p>}
 	</body>
 </html>
